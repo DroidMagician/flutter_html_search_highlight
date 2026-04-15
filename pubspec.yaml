@@ -1,0 +1,28 @@
+name: flutter_html_search_highlight
+description: >
+  Search HTML content, wrap matches in <mark>, and page through results using
+  flutter_html—with keyword normalization and scroll-to-match helpers.
+version: 0.1.0
+homepage: https://github.com/kishan/flutter_html_search_highlight
+repository: https://github.com/kishan/flutter_html_search_highlight
+issue_tracker: https://github.com/kishan/flutter_html_search_highlight/issues
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_html: ^3.0.0
+  html: ^0.15.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+topics:
+  - html
+  - search
+  - widgets
