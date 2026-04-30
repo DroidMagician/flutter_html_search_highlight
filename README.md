@@ -7,13 +7,14 @@ Search across HTML pages, highlight matches with `<mark>`, and give users smooth
 ---
 
 ## 🎬 Demo
+
 Instantly search, highlight, and navigate across HTML content:
+
 ### Single Page Search
-<img src="https://raw.githubusercontent.com/DroidMagician/flutter_html_search_highlight/main/assets/single_page_demo.gif" width="300" alt="Single Page Demo">
+![Single Page Demo](https://raw.githubusercontent.com/DroidMagician/flutter_html_search_highlight/main/assets/single_page_demo.gif)
 
 ### Multi Page Search
-<img src="https://raw.githubusercontent.com/DroidMagician/flutter_html_search_highlight/main/assets/multi_page_demo.gif" width="300" alt="Multi Page Demo">
-
+![Multi Page Demo](https://raw.githubusercontent.com/DroidMagician/flutter_html_search_highlight/main/assets/multi_page_demo.gif)
 
 ## ✨ Features
 
