@@ -56,15 +56,28 @@ dependencies:
 
 Instead of building everything manually on top of `flutter_html`, this package gives you:
 
-✅ Built-in search UI
-✅ Automatic highlighting
-✅ Match navigation (next / previous)
-✅ Multi-page support
-✅ Scroll-to-match logic
+- ✅ Built-in search UI
+- ✅ Automatic highlighting
+- ✅ Match navigation (next / previous)
+- ✅ Multi-page support
+- ✅ Scroll-to-match logic
 
 All without writing complex parsing or state management.
 
 ---
+🧩 When should I use this?
+
+Use this package if you need:
+
+- Search inside long HTML content
+- Highlight keywords dynamically
+- Navigate between search results
+- Handle multi-page or paginated HTML
+
+Perfect for:
+- 📖 Reader apps
+- 📄 Documentation viewers
+- 📰 Article-based apps
 
 ## 🧠 Core API (Custom UI)
 
