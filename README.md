@@ -1,32 +1,85 @@
 # flutter_html_search_highlight
 
-Search plain text inside HTML fragments, wrap hits with `<mark>`, and optionally show a **paged reader** with search, match counts, and prev/next navigation—built on [`flutter_html`](https://pub.dev/packages/flutter_html) and the [`html`](https://pub.dev/packages/html) parser.
+🔥 **Highlight and navigate search results inside HTML content in Flutter — with built-in UI and zero setup.**
 
-## Install
+Search across HTML pages, highlight matches with `<mark>`, and give users smooth navigation (next/previous) without writing custom parsing logic.
+
+---
+
+## 🎬 Demo
+
+```md
+![Demo](https://your-demo-gif-url.gif)
+```
+
+---
+
+## ✨ Features
+
+* 🔍 Search plain text inside HTML content
+* 🎯 Highlight matches using `<mark>` tags
+* 📄 Supports multi-page HTML content
+* ⏭️ Navigate between matches (next / previous)
+* 📊 Match count per page
+* 🧭 Scroll positioning for matches
+* 🎨 Fully customizable UI (search bar, styles, icons)
+* ⚡ Built on `flutter_html` + HTML parser
+
+---
+
+## 🚀 Quick Start
+
+```dart
+import 'package:flutter_html_search_highlight/flutter_html_search_highlight.dart';
+
+HtmlPagedSearchReader(
+  htmlContent: "<p>Hello Flutter world</p>",
+)
+```
+
+That’s it. No extra setup needed.
+
+---
+
+## 📦 Installation
 
 ```yaml
 dependencies:
   flutter_html_search_highlight: ^0.1.0
 ```
 
-## Usage
+---
 
-### 1. Core API (any UI)
+## 💡 Why use this?
 
-Clean HTML once when you load it, then run a search across pages:
+Instead of building everything manually on top of `flutter_html`, this package gives you:
+
+✅ Built-in search UI
+✅ Automatic highlighting
+✅ Match navigation (next / previous)
+✅ Multi-page support
+✅ Scroll-to-match logic
+
+All without writing complex parsing or state management.
+
+---
+
+## 🧠 Core API (Custom UI)
+
+Use this if you want full control over UI.
 
 ```dart
-import 'package:flutter_html_search_highlight/flutter_html_search_highlight.dart';
-
 final cleaned = pages.map(HtmlSearchHighlighter.cleanHtml).toList();
+
 final result = HtmlSearchHighlighter.searchPages(cleaned, "week's");
 
-// result.displayPages — HTML with <mark>…</mark>
-// result.matches       — MatchLocation(pageIndex, matchIndex)
-// result.matchesPerPage
+// Access results
+result.displayPages;
+result.matches;
+result.matchesPerPage;
 ```
 
-Helper for approximate scroll alignment (same idea as mapping match index to a fraction of `maxScrollExtent`):
+### Scroll alignment helper
 
 ```dart
 final offset = HtmlSearchHighlighter.scrollOffsetForMatch(
@@ -37,23 +90,22 @@ final offset = HtmlSearchHighlighter.scrollOffsetForMatch(
 );
 ```
 
-### 2. Built-in paged reader
+---
+
+## 📖 Built-in Paged Reader
+
+### Multi-page HTML
 
 ```dart
-import 'package:flutter/material.dart';
-import 'package:flutter_html_search_highlight/flutter_html_search_highlight.dart';
-
 HtmlPagedSearchReader(
   htmlPages: const [
-    '<p>First page mentions <b>Flutter</b> and HTML.</p>',
+    '<p>First page mentions <b>Flutter</b>.</p>',
     '<p>Second page also talks about Flutter.</p>',
   ],
-  // optional callback is still available
-  onPageChanged: (i) => debugPrint('page $i'),
 )
 ```
 
-Single HTML string:
+### Single HTML content
 
 ```dart
 HtmlPagedSearchReader(
@@ -61,24 +113,32 @@ HtmlPagedSearchReader(
 )
 ```
 
-Use one flag to force behavior:
+---
+
+## 🔄 Content Modes
+
+Force behavior explicitly:
 
 ```dart
 HtmlPagedSearchReader(
   htmlPages: manySections,
-  contentMode: HtmlContentMode.singlePage, // merge into one page
+  contentMode: HtmlContentMode.singlePage,
   singlePageSeparator: '<hr/>',
 )
 ```
 
 ```dart
 HtmlPagedSearchReader(
-  htmlContent: myOneHtmlString,
-  contentMode: HtmlContentMode.multiPage, // treated as list of 1 page
+  htmlContent: myHtml,
+  contentMode: HtmlContentMode.multiPage,
 )
 ```
 
-Customize `<mark>` and other tags via [flutter_html `Style`](https://pub.dev/packages/flutter_html):
+---
+
+## 🎨 Customization
+
+### Highlight & styles
 
 ```dart
 HtmlPagedSearchReader(
@@ -86,28 +146,14 @@ HtmlPagedSearchReader(
   highlightColor: Colors.orangeAccent,
   markStyle: Style(backgroundColor: Colors.lime),
   htmlStyles: {
-    'h1': Style(fontSize: FontSize(22), fontWeight: FontWeight.w600),
+    'h1': Style(fontSize: FontSize(22)),
   },
 )
 ```
 
-Set `cleanPagesOnLoad: false` if you already called `HtmlSearchHighlighter.cleanHtml` yourself.
+---
 
-### 3. Customize search bar, counter, and arrows
-
-```dart
-HtmlPagedSearchReader(
-  htmlPages: myPages,
-  highlightColor: Colors.amber, // quick highlight color
-  searchTextStyle: const TextStyle(fontSize: 14),
-  searchHintStyle: const TextStyle(color: Colors.grey),
-  counterTextStyle: const TextStyle(fontWeight: FontWeight.w700),
-  previousMatchIcon: const Icon(Icons.arrow_upward),
-  nextMatchIcon: const Icon(Icons.arrow_downward),
-)
-```
-
-For complete control, replace the widgets:
+### Customize search UI
 
 ```dart
 HtmlPagedSearchReader(
@@ -116,9 +162,19 @@ HtmlPagedSearchReader(
     return TextField(
       controller: controller,
       onChanged: onChanged,
-      decoration: const InputDecoration(hintText: 'Type keyword'),
+      decoration: const InputDecoration(hintText: 'Search...'),
     );
   },
+)
+```
+
+---
+
+### Customize navigation UI
+
+```dart
+HtmlPagedSearchReader(
+  htmlPages: myPages,
   matchNavigationBuilder: (
     context,
     currentMatch,
@@ -129,20 +185,54 @@ HtmlPagedSearchReader(
     return Row(
       children: [
         Text('$currentMatch/$totalMatches'),
-        IconButton(onPressed: onPrevious, icon: const Icon(Icons.expand_less)),
-        IconButton(onPressed: onNext, icon: const Icon(Icons.expand_more)),
+        IconButton(onPressed: onPrevious, icon: Icon(Icons.expand_less)),
+        IconButton(onPressed: onNext, icon: Icon(Icons.expand_more)),
       ],
     );
   },
 )
 ```
 
-## Publishing checklist
+---
 
-1. Replace the placeholder `homepage` / `repository` / `issue_tracker` URLs in `pubspec.yaml` with your real GitHub (or other) links.
-2. Run `dart analyze` and `flutter test`.
-3. Run `dart pub publish --dry-run` and fix any reported issues.
+## 📁 Example
 
-## License
+Check the `/example` folder for a complete working demo.
 
-See [LICENSE](LICENSE).
+---
+
+## ⚙️ Tips
+
+* Call `cleanHtml()` once for better performance
+* Set `cleanPagesOnLoad: false` if already cleaned
+* Use pagination for large HTML content
+
+---
+
+## 🧾 Changelog
+
+### 0.1.0
+
+✨ Initial release
+
+* HTML search & highlight
+* Paged reader with navigation
+* Match tracking and scroll support
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+---
+
+## 📄 License
+
+See `LICENSE`.
+
+---
+
+## ⭐ Support
+
+If this package helps you, consider giving it a ⭐ on GitHub and a 👍 on pub.dev.
