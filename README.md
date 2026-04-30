@@ -8,11 +8,12 @@ Search across HTML pages, highlight matches with `<mark>`, and give users smooth
 
 ## 🎬 Demo
 
-```md
-![Demo](https://your-demo-gif-url.gif)
-```
+### Single Page Search
+![Single Page Demo](https://raw.githubusercontent.com/DroidMagician/flutter_html_search_highlight/main/assets/single_page_demo.gif)
 
----
+### Multi Page Search
+![Multi Page Demo](https://raw.githubusercontent.com/DroidMagician/flutter_html_search_highlight/main/assets/multi_page_demo.gif)
+
 
 ## ✨ Features
 
