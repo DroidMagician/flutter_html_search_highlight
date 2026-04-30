@@ -1,4 +1,6 @@
-# flutter_html_search_highlight
+# Flutter HTML Search Highlight
+[![pub version](https://img.shields.io/pub/v/flutter_html_search_highlight.svg)](https://pub.dev/packages/flutter_html_search_highlight)  
+[![likes](https://img.shields.io/pub/likes/flutter_html_search_highlight)](https://pub.dev/packages/flutter_html_search_highlight)
 
 🔥 **Highlight and navigate search results inside HTML content in Flutter — with built-in UI and zero setup.**
 
@@ -224,17 +226,6 @@ Check the `/example` folder for a complete working demo.
 
 ---
 
-## 🧾 Changelog
-
-### 0.1.0
-
-✨ Initial release
-
-* HTML search & highlight
-* Paged reader with navigation
-* Match tracking and scroll support
-
----
 
 ## 🤝 Contributing
 
